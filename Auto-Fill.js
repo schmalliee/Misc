@@ -4,10 +4,10 @@
   var mainLoadable;
   
   //load jquery
-  console.log("Load JQuery");
-  var script = document.createElement('script');
-  script.src = '//code.jquery.com/jquery-1.11.0.min.js';
-  document.getElementsByTagName('head')[0].appendChild(script);
+  console.log("Load JQuery2");
+  el=document.createElement('script');
+  el.src='http://code.jquery.com/jquery-latest.min.js';
+  document.body.appendChild(el);
 
   var randomPhone = function() { 
     var x = [ 3, 0, 3, 4 ]; 

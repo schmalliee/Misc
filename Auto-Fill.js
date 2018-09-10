@@ -6,7 +6,7 @@
   var randomPhone = function() { 
     var x = [ 3, 0, 3, 4 ]; 
     while(x.length < 10) { 
-      x.push(Math.round(Math.random()*10));
+      x.push(Math.floor(Math.random()*10));
     }
     return x.join('');
   }; 

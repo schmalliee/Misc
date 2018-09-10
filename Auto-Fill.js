@@ -21,7 +21,7 @@
     settings.consumer.postalCode = zipInput;
     settings.consumer.city = zipInfo.responseJSON.postalcodes[0].placeName;
     settings.consumer.state = zipInfo.responseJSON.postalcodes[0].adminCode1;
-  {
+  }
   
   function getCityState() { 
     var searchResponse = $.getJSON("http://www.geonames.org/postalCodeLookupJSON?&country=US&callback=?", {

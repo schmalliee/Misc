@@ -21,7 +21,7 @@
   function getCityState(zipCode) { 
     var xhttp;
     xhttp=new XMLHttpRequest();
-    var url = "http://www.geonames.org/postalCodeLookupJSON?&country=US&callback=?&postalcode=" + zipCode
+    var url = "https://www.geonames.org/postalCodeLookupJSON?&country=US&callback=?&postalcode=" + zipCode
     xhttp.open("GET", url, false);
     xhttp.send();
     

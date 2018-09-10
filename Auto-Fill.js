@@ -33,14 +33,14 @@
 
   var settings = { 
     consumer: { 
-      firstName: "Allie",
-      lastName: "Craig",
+      firstName: "Wade",
+      lastName: "Wilson",
       addressLine1: "1882 E 104th Ave",
       postalCode: "99547",
       city: "Atka",
       state: "AK",
       phone: randomPhone(),
-      email: "acraig4a2g." + Math.round(Math.random()*100000) + ".ememnemei2@edify.com",
+      email: "wwilson4a2g." + Math.round(Math.random()*100000) + ".ememnemei2@edify.com",
     }
   };
 

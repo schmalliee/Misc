@@ -16,7 +16,7 @@
       firstName: "Allie",
       lastName: "Craig",
       addressLine1: "1882 E 104th Ave",
-      postalCode: "99547",
+      postalCode: document.getElementById('conZip'),
       city: "Atka",
       state: "AK",
       phone: randomPhone(),

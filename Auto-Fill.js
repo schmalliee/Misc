@@ -2,12 +2,6 @@
 (function(w,d,sb,$,models,cards,pub){
 
   var mainLoadable;
-  
-  //load jquery
-  console.log("Load JQuery2");
-  el=document.createElement('script');
-  el.src='http://code.jquery.com/jquery-latest.min.js';
-  document.body.appendChild(el);
 
   var randomPhone = function() { 
     var x = [ 3, 0, 3, 4 ]; 
@@ -17,20 +11,24 @@
     return x.join('');
   }; 
   
-  function fillCityState() {
-    var zipInfo = getCityState();
+  function fillCityState(zipInput) {
+    var zipInfo = getCityState(zipInput);
     settings.consumer.postalCode = zipInput;
-    settings.consumer.city = zipInfo.responseJSON.postalcodes[0].placeName;
-    settings.consumer.state = zipInfo.responseJSON.postalcodes[0].adminCode1;
+    settings.consumer.city = zipInfo.placeName;
+    settings.consumer.state = zipInfo.adminCode1;
   }
   
-  function getCityState() { 
-    var searchResponse = $.getJSON("http://www.geonames.org/postalCodeLookupJSON?&country=US&callback=?", {
-      postalcode: document.getElementById('conZip').value
-      }, function(response) {
-        return response;
-    });
-    return searchResponse;
+  function getCityState(zipCode) { 
+    var xhttp;
+    xhttp=new XMLHttpRequest();
+    var url = "http://www.geonames.org/postalCodeLookupJSON?&country=US&callback=?&postalcode=" + zipCode
+    xhttp.open("GET", url, false);
+    xhttp.send();
+    
+    var parseFront = xhttp.response.substring(2);
+    var parseBack = parseFront.slice(0, -2);
+    var formatJSON = JSON.parse(parseBack).postalcodes[0];
+    return formatJSON;
   }
 
   var settings = { 
@@ -65,11 +63,11 @@
     if(mainLoadable.getState() != 'initial') return mainLoadable.on('initial',start);
     var zipInput = document.getElementById('conZip').value;
     if(zipInput != null && zipInput != ""){
-      fillCityState();
+      fillCityState(zipInput);
     } else {
       var zip = prompt("Please enter a zip", "99547");
       if(zip != null && zip != ""){
-        fillCityState();
+        fillCityState(zip);
       }
     }
     $.extend(models.consumer,settings.consumer,models.consumer);

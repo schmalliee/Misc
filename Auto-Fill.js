@@ -2,6 +2,11 @@
 (function(w,d,sb,$,models,cards,pub){
 
   var mainLoadable;
+  
+  //load jquery
+  var script = document.createElement('script');
+  script.src = '//code.jquery.com/jquery-1.11.0.min.js';
+  document.getElementsByTagName('head')[0].appendChild(script); 
 
   var randomPhone = function() { 
     var x = [ 3, 0, 3, 4 ]; 
@@ -10,19 +15,35 @@
     }
     return x.join('');
   }; 
+  
+  function fillCityState() {
+    var zipInfo = getCityState();
+    settings.consumer.postalCode = zipInput;
+    settings.consumer.city = zipInfo.responseJSON.postalcodes[0].placeName;
+    settings.consumer.state = zipInfo.responseJSON.postalcodes[0].adminCode1;
+  {
+  
+  function getCityState() { 
+    var searchResponse = $.getJSON("http://www.geonames.org/postalCodeLookupJSON?&country=US&callback=?", {
+      postalcode: document.getElementById('conZip').value
+      }, function(response) {
+        return response;
+    });
+    return searchResponse;
+  }
 
   var settings = { 
     consumer: { 
       firstName: "Allie",
       lastName: "Craig",
       addressLine1: "1882 E 104th Ave",
-      postalCode: document.getElementById('conZip').value,
+      postalCode: "99547",
       city: "Atka",
       state: "AK",
       phone: randomPhone(),
       email: "acraig4a2g." + Math.round(Math.random()*100000) + ".ememnemei2@edify.com",
     }
-  }; 
+  };
 
   // re-purpose the loading spinners for cards: 
   var _ogShow = cards.showCardSpinner
@@ -41,6 +62,15 @@
   var start = function(){
     mainLoadable = HA.ui.loadable('scrollingInterview');
     if(mainLoadable.getState() != 'initial') return mainLoadable.on('initial',start);
+    var zipInput = document.getElementById('conZip').value;
+    if(zipInput != null && zipInput != ""){
+      fillCityState();
+    } else {
+      var zip = prompt("Please enter a zip", "99547");
+      if(zip != null && zip != ""){
+        fillCityState();
+      }
+    }
     $.extend(models.consumer,settings.consumer,models.consumer);
     sb.bind('consumer',models.consumer);
     doSomeSubmitting();

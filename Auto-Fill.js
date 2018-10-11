@@ -79,6 +79,7 @@
   var doSomeSubmitting = function(){
     if(cards.state.lastCard && cards.state.lastCard != lastCard) {
       lastCard = cards.state.lastCard;
+      console.log(cards.state.lastCard.getAttribute('name'));
       var name = cards.state.lastCard.getAttribute('name');  
       if(name == 'combinedSubmit' && !interstitialDone) { 
         $(cards.state.lastCard).find('.interstitial-container a').first().click();
@@ -88,7 +89,7 @@
       } if(name == 'price'){
           $(cards.state.lastCard).find('#price-footer').find('input[type="submit"]').first().click();      
       } else { 
-        if(name == 'combinedSubmit') doneSubmitting = true;
+        //if(name == 'combinedSubmit') doneSubmitting = true;
         $(cards.state.lastCard).find('form').find('input[type="submit"]').first().click();
       }
     } 

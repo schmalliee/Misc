@@ -88,7 +88,8 @@
       } if(name == 'price'){
           $(cards.state.lastCard).find('#price-footer').find('input[type="submit"]').first().click();      
       } if(name == 'account'){
-          console.log($(cards.state.lastCard).find('#login-password-input-show').first()[0].value;          
+          console.log("ACCOUNT!!!!");
+          console.log($(cards.state.lastCard).find('#login-password-input-show').first()[0].value);          
           $(cards.state.lastCard).find('#login-password-input-show').first()[0].value = "temp123";          
           //$(cards.state.lastCard).find('form').find('input[type="submit"]').first().click();      
       } else { 

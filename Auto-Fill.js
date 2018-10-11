@@ -77,6 +77,7 @@
 
   var lastCard = null, interstitialDone = false, doneSubmitting = false;
   var doSomeSubmitting = function(){
+    console.log("?????")
     if(cards.state.lastCard && cards.state.lastCard != lastCard) {
       lastCard = cards.state.lastCard;
       var name = cards.state.lastCard.getAttribute('name');  
@@ -85,6 +86,8 @@
         lastCard = null;
         interstitialDone = true;
         w.setTimeout(doSomeSubmitting,1300);
+      } if(name == 'price'){
+          $(cards.state.lastCard).find('#price-footer').find('input[type="submit"]').first().click();      
       } else { 
         if(name == 'combinedSubmit') doneSubmitting = true;
         $(cards.state.lastCard).find('form').find('input[type="submit"]').first().click();

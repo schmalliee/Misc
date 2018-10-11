@@ -82,9 +82,8 @@
       console.log(cards.state.lastCard.getAttribute('name'));
       var name = cards.state.lastCard.getAttribute('name');  
       if(name == 'combinedSubmit' && !interstitialDone) { 
-        $(cards.state.lastCard).find('.interstitial-container a').first().click();
+        $(cards.state.lastCard).find('form').find('input[type="submit"]').first().click();
         lastCard = null;
-        interstitialDone = true;
         w.setTimeout(doSomeSubmitting,1300);
       } if(name == 'price'){
           $(cards.state.lastCard).find('#price-footer').find('input[type="submit"]').first().click();      

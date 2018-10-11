@@ -60,6 +60,7 @@
 
   var start = function(){
     console.log("????????????");
+    document.body.innerHTML="<h1>Hi!</h1> Test!";    
     mainLoadable = HA.ui.loadable('scrollingInterview');
     if(mainLoadable.getState() != 'initial') return mainLoadable.on('initial',start);
     var zipInput = document.getElementById('conZip').value;

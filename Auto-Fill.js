@@ -72,6 +72,8 @@
     }
     $.extend(models.consumer,settings.consumer,models.consumer);
     sb.bind('consumer',models.consumer);
+    console.log("WHAAAT");
+    alert("???");
     doSomeSubmitting();
   };
 

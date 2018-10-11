@@ -72,14 +72,11 @@
     }
     $.extend(models.consumer,settings.consumer,models.consumer);
     sb.bind('consumer',models.consumer);
-    console.log("WHAAAT");
-    alert("???");
     doSomeSubmitting();
   };
 
   var lastCard = null, interstitialDone = false, doneSubmitting = false;
   var doSomeSubmitting = function(){
-    console.log(cards.state.lastCard.getAttribute('name'))
     if(cards.state.lastCard && cards.state.lastCard != lastCard) {
       lastCard = cards.state.lastCard;
       var name = cards.state.lastCard.getAttribute('name');  

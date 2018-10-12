@@ -89,7 +89,7 @@
           $(cards.state.lastCard).find('#price-footer').find('input[type="submit"]').first().click();      
       } if(name == 'account'){          
           $(cards.state.lastCard).find('#login-password-input-show').first().value = "temp123";
-          if($('#login-password-input-show').is(':visible')) {
+          if(document.getElementById('#login-password-input-show).offsetParent === null){
              $('#login-password-input-show').click();             
           }      
       } else { 

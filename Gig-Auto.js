@@ -88,8 +88,10 @@
       } if(name == 'price'){
           $(cards.state.lastCard).find('#price-footer').find('input[type="submit"]').first().click();      
       } if(name == 'account'){          
-          $(cards.state.lastCard).find('#login-password-input-show').first().value = "temp123";          
-          $(cards.state.lastCard).find('form').find('input[type="submit"]:visible').first().click();      
+          $(cards.state.lastCard).find('#login-password-input-show').first().value = "temp123";
+          if($('#login-password-input-show').is(':visible') {
+             $('#login-password-input-show').click();             
+          }      
       } else { 
         //if(name == 'combinedSubmit') doneSubmitting = true;
         $(cards.state.lastCard).find('form').find('input[type="submit"]').first().click();

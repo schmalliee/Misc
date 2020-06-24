@@ -1,5 +1,5 @@
 const waitForEl = function(selector, callback) {
-  if ($(selector).length) {
+  if ($(selector) !== null) {
     callback();
   } else {
     setTimeout(() => {

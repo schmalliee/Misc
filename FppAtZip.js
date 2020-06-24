@@ -1,22 +1,3 @@
-getURL();
-
-const getURL = function() {
-  const splitPath = window.location.pathname.split('/');
-  const page = splitPath[splitPath.length - 1];
-
-  switch (page) {
-    case 'contact':
-      fillContact();
-      break;
-    case 'project-info':
-      clickThrough();
-      break;
-    case 'address':
-      fillAddress();
-      break;
-  }
-};
-
 const clickThrough = function() {
   $('.nextPage').click();
   getURL();
@@ -61,3 +42,22 @@ const randomPhone = function() {
   }
   return x.join('');
 };
+
+const getURL = function() {
+  const splitPath = window.location.pathname.split('/');
+  const page = splitPath[splitPath.length - 1];
+
+  switch (page) {
+    case 'contact':
+      fillContact();
+      break;
+    case 'project-info':
+      clickThrough();
+      break;
+    case 'address':
+      fillAddress();
+      break;
+  }
+};
+
+getURL();

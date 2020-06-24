@@ -1,43 +1,56 @@
+var script = document.createElement('script');script.src = "https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js";
+document.getElementsByTagName('head')[0].appendChild(script);
+
 const waitForEl = function(selector, callback) {
-  if ($(selector) !== null) {
+  const el = $(selector);
+  if (el !== null && typeof el !== 'undefined') {
+    const address = $('[data-test="street-input"]');
     callback();
   } else {
     setTimeout(() => {
       waitForEl(selector, callback);
-    }, 100);
+    }, 1000);
   }
 };
 
 const clickThrough = function() {
-  $('.nextPage').click();
-  getURL();
+  const splitPath = window.location.pathname.split('/');
+  const page = splitPath[splitPath.length - 1];
+  if (page !== 'contact') {
+    $('.nextPage').click();
+    setTimeout(() => {
+      getURL();
+    }, 500);
+  } else {
+    $('.nextPage').click();
+  }
 };
 
 const fillAddress = function() {
-  const address = $('.page-header');
-  waitForEl(address, () => {
-    const address = $('.address-input[data-test="street-input"] > [data-qa="text-input"]');
-    const city = $('.address-input[data-test="city-input"] > [data-qa="text-input"]');
-    const zip = $('.address-input[data-test="zip-input"] > [data-qa="text-input"]');
+  const header = '[data-test="street-input"]';
+  waitForEl(header, () => {
+    const address = document.querySelector('[data-test="street-input"]');
+    const city = document.querySelector('[data-test="city-input"]');
+    const zip = document.querySelector('[data-test="zip-input"]');
 
     address.value = '1234 Main St';
     address.dispatchEvent(new Event('input'));
     city.value = 'Denver';
     city.dispatchEvent(new Event('input'));
-    const zipCode = prompt('Please enter a zip", "80202');
-    zip.value = zipCode;
+    //const zipCode = prompt('Please enter a zip', '80202');
+    zip.value = '80202';
     zip.dispatchEvent(new Event('input'));
     clickThrough();
   });
 };
 
 const fillContact = function() {
-  const firstName = $('page-header');
-  waitForEl(firstName, () => {
-    const firstName = $('.contact-input[data-test="first-name-input"] > [data-qa="text-input"]');
-    const lastName = $('.contact-input[data-test="last-name-input"] > [data-qa="text-input"]');
-    const phone = $('.contact-input[data-test="phone-input"] > [data-qa="text-input"]');
-    const email = $('.contact-input[data-test="email-input"] > [data-qa="text-input"]');
+  const header = $('[data-test="first-name-input"]');
+  waitForEl(header, () => {
+    const firstName = document.querySelector('[data-test="first-name-input"]');
+    const lastName = document.querySelector('[data-test="last-name-input"]');
+    const phone = document.querySelector('[data-test="phone-input"]');
+    const email = document.querySelector('[data-test="email-input"]');
 
     firstName.value = 'Wade';
     firstName.dispatchEvent(new Event('input'));
@@ -47,14 +60,17 @@ const fillContact = function() {
     phone.dispatchEvent(new Event('input'));
     email.value = 'wwilson.' + Date.now() + '.fppatzip@edify.com';
     email.dispatchEvent(new Event('input'));
-    clickThrough();
+    setTimeout(() => {
+      clickThrough();
+    }, 500);
   });
 };
 
 const randomPhone = function() {
-  const x = [3, 0, 3, 4];
-  while (x.length < 10) {
+  const x = [3, 0, 3, '-', 4];
+  while (x.length < 12) {
     x.push(Math.floor(Math.random() * 10));
+    if (x.length == 7) x.push('-');
   }
   return x.join('');
 };

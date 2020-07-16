@@ -23,19 +23,22 @@ const clickThrough = function() {
 };
 
 const fillAddress = function() {
-  const header = '[data-test="street-input"]';
-  waitForEl(header, () => {
+  const next = '.nextPage';
+  waitForEl(next, () => {
     const address = document.querySelector('[data-test="street-input"]');
     const city = document.querySelector('[data-test="city-input"]');
     const zip = document.querySelector('[data-test="zip-input"]');
     const email = document.querySelector('[data-test="email-input"]');
 
-
-    address.value = '1234 Main St';
-    address.dispatchEvent(new Event('input'));
-    city.value = 'Denver';
-    city.dispatchEvent(new Event('input'));
-    if (zip.value === "") {
+    if (address) {
+        address.value = '1234 Main St';
+        address.dispatchEvent(new Event('input'));
+    }
+    if (city) {
+        city.value = 'Denver';
+        city.dispatchEvent(new Event('input'));
+    }
+    if (zip && zip.value === "") {
         const zipCode = prompt('Please enter a zip', '80202');
         zip.value = zipCode;
         zip.dispatchEvent(new Event('input'));
@@ -49,11 +52,13 @@ const fillAddress = function() {
 };
 
 const fillContact = function() {
-  const header = '[data-test="first-name-input"]';
-  waitForEl(header, () => {
+  const next = '.nextPage';
+  waitForEl(next, () => {
     const firstName = document.querySelector('[data-test="first-name-input"]');
     const lastName = document.querySelector('[data-test="last-name-input"]');
     const phone = document.querySelector('[data-test="phone-input"]');
+    const address = document.querySelector('[data-test="street-input"]');
+    const city = document.querySelector('[data-test="city-input"]');
     const email = document.querySelector('[data-test="email-input"]');
 
     firstName.value = 'Wade';
@@ -65,6 +70,14 @@ const fillContact = function() {
     if (email) {
         email.value = 'wwilson.' + Date.now() + '.fppatzip@edify.com';
         email.dispatchEvent(new Event('input'));
+    }
+    if (address) {
+        address.value = '1234 Main St';
+        address.dispatchEvent(new Event('input'));
+    }
+    if (city) {
+        city.value = 'Denver';
+        city.dispatchEvent(new Event('input'));
     }
     setTimeout(() => {
       clickThrough();

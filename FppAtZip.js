@@ -1,5 +1,7 @@
 const waitForEl = function(selector, callback) {
   const el = document.querySelector(selector);
+console.log(document.querySelector('[data-test="first-name-input"]'));
+console.log(el);
   if (el !== null && typeof el !== 'undefined') {
     callback();
   } else {
@@ -52,8 +54,8 @@ const fillAddress = function() {
 };
 
 const fillContact = function() {
-  const next = '.nextPage';
-  waitForEl(next, () => {
+  const name = '[data-test="first-name-input"]';
+  waitForEl(name, () => {
     const firstName = document.querySelector('[data-test="first-name-input"]');
     const lastName = document.querySelector('[data-test="last-name-input"]');
     const phone = document.querySelector('[data-test="phone-input"]');

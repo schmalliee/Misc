@@ -28,14 +28,22 @@ const fillAddress = function() {
     const address = document.querySelector('[data-test="street-input"]');
     const city = document.querySelector('[data-test="city-input"]');
     const zip = document.querySelector('[data-test="zip-input"]');
+    const email = document.querySelector('[data-test="email-input"]');
+
 
     address.value = '1234 Main St';
     address.dispatchEvent(new Event('input'));
     city.value = 'Denver';
     city.dispatchEvent(new Event('input'));
-    const zipCode = prompt('Please enter a zip', '80202');
-    zip.value = zipCode;
-    zip.dispatchEvent(new Event('input'));
+    if (zip.value === "") {
+        const zipCode = prompt('Please enter a zip', '80202');
+        zip.value = zipCode;
+        zip.dispatchEvent(new Event('input'));
+    }
+    if (email) {
+        email.value = 'wwilson.' + Date.now() + '.fppatzip@edify.com';
+        email.dispatchEvent(new Event('input'));
+    }
     clickThrough();
   });
 };
@@ -54,8 +62,10 @@ const fillContact = function() {
     lastName.dispatchEvent(new Event('input'));
     phone.value = randomPhone();
     phone.dispatchEvent(new Event('input'));
-    email.value = 'wwilson.' + Date.now() + '.fppatzip@edify.com';
-    email.dispatchEvent(new Event('input'));
+    if (email) {
+        email.value = 'wwilson.' + Date.now() + '.fppatzip@edify.com';
+        email.dispatchEvent(new Event('input'));
+    }
     setTimeout(() => {
       clickThrough();
     }, 500);

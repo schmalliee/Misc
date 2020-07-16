@@ -1,12 +1,6 @@
-//TODO: Kill Jquery and make zipcode enter-able
-
-var script = document.createElement('script');script.src = "https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js";
-document.getElementsByTagName('head')[0].appendChild(script);
-
 const waitForEl = function(selector, callback) {
-  const el = $(selector);
+  const el = document.querySelector(selector);
   if (el !== null && typeof el !== 'undefined') {
-    const address = $('[data-test="street-input"]');
     callback();
   } else {
     setTimeout(() => {
@@ -19,12 +13,12 @@ const clickThrough = function() {
   const splitPath = window.location.pathname.split('/');
   const page = splitPath[splitPath.length - 1];
   if (page !== 'contact') {
-    $('.nextPage').click();
+    document.getElementsByClassName('nextPage')[0].click();
     setTimeout(() => {
       getURL();
     }, 500);
   } else {
-    $('.nextPage').click();
+    document.getElementsByClassName('nextPage')[0].click();
   }
 };
 
@@ -39,15 +33,15 @@ const fillAddress = function() {
     address.dispatchEvent(new Event('input'));
     city.value = 'Denver';
     city.dispatchEvent(new Event('input'));
-    //const zipCode = prompt('Please enter a zip', '80202');
-    zip.value = '80202';
+    const zipCode = prompt('Please enter a zip', '80202');
+    zip.value = zipCode;
     zip.dispatchEvent(new Event('input'));
     clickThrough();
   });
 };
 
 const fillContact = function() {
-  const header = $('[data-test="first-name-input"]');
+  const header = '[data-test="first-name-input"]';
   waitForEl(header, () => {
     const firstName = document.querySelector('[data-test="first-name-input"]');
     const lastName = document.querySelector('[data-test="last-name-input"]');

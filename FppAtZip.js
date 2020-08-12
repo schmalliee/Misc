@@ -1,7 +1,5 @@
 const waitForEl = function(selector, callback) {
   const el = document.querySelector(selector);
-console.log(document.querySelector('[data-test="first-name-input"]'));
-console.log(el);
   if (el !== null && typeof el !== 'undefined') {
     callback();
   } else {
@@ -13,25 +11,41 @@ console.log(el);
 
 const clickThrough = function() {
   const splitPath = window.location.pathname.split('/');
+  const next = document.getElementsByClassName('nextPage')[0] || document.getElementsByClassName('qardi-next')[0];
   const page = splitPath[splitPath.length - 1];
   if (page !== 'contact') {
-    document.getElementsByClassName('nextPage')[0].click();
+    next.click();
     setTimeout(() => {
       getURL();
     }, 500);
   } else {
-    document.getElementsByClassName('nextPage')[0].click();
+    next.click();
   }
 };
 
-const fillAddress = function() {
-  const next = '.nextPage';
+const fillData = function() {
+  const next = '.panel-content';
   waitForEl(next, () => {
     const address = document.querySelector('[data-test="street-input"]');
     const city = document.querySelector('[data-test="city-input"]');
     const zip = document.querySelector('[data-test="zip-input"]');
     const email = document.querySelector('[data-test="email-input"]');
+    const firstName = document.querySelector('[data-test="first-name-input"]');
+    const lastName = document.querySelector('[data-test="last-name-input"]');
+    const phone = document.querySelector('[data-test="phone-input"]');
 
+    if (firstName) {
+    firstName.value = 'Wade';
+    firstName.dispatchEvent(new Event('input'));
+    }
+    if (lastName) {
+    lastName.value = 'Wilson';
+    lastName.dispatchEvent(new Event('input'));
+    }
+    if (phone) {
+    phone.value = randomPhone();
+    phone.dispatchEvent(new Event('input'));
+    }
     if (address) {
         address.value = '1234 Main St';
         address.dispatchEvent(new Event('input'));
@@ -53,40 +67,6 @@ const fillAddress = function() {
   });
 };
 
-const fillContact = function() {
-  const name = '[data-test="first-name-input"]';
-  waitForEl(name, () => {
-    const firstName = document.querySelector('[data-test="first-name-input"]');
-    const lastName = document.querySelector('[data-test="last-name-input"]');
-    const phone = document.querySelector('[data-test="phone-input"]');
-    const address = document.querySelector('[data-test="street-input"]');
-    const city = document.querySelector('[data-test="city-input"]');
-    const email = document.querySelector('[data-test="email-input"]');
-
-    firstName.value = 'Wade';
-    firstName.dispatchEvent(new Event('input'));
-    lastName.value = 'Wilson';
-    lastName.dispatchEvent(new Event('input'));
-    phone.value = randomPhone();
-    phone.dispatchEvent(new Event('input'));
-    if (email) {
-        email.value = 'wwilson.' + Date.now() + '.fppatzip@edify.com';
-        email.dispatchEvent(new Event('input'));
-    }
-    if (address) {
-        address.value = '1234 Main St';
-        address.dispatchEvent(new Event('input'));
-    }
-    if (city) {
-        city.value = 'Denver';
-        city.dispatchEvent(new Event('input'));
-    }
-    setTimeout(() => {
-      clickThrough();
-    }, 500);
-  });
-};
-
 const randomPhone = function() {
   const x = [3, 0, 3, '-', 4];
   while (x.length < 12) {
@@ -101,14 +81,11 @@ const getURL = function() {
   const page = splitPath[splitPath.length - 1];
 
   switch (page) {
-    case 'contact':
-      fillContact();
-      break;
     case 'project-info':
       clickThrough();
       break;
-    case 'address':
-      fillAddress();
+    default:
+      fillData();
       break;
   }
 };

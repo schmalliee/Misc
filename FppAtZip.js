@@ -63,7 +63,9 @@ const fillData = function() {
         email.value = 'wwilson.' + Date.now() + '.fppatzip@edify.com';
         email.dispatchEvent(new Event('input'));
     }
-    clickThrough();
+    setTimeout(() => {
+      clickThrough();
+    }, 100);
   });
 };
 
